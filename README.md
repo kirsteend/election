@@ -4,7 +4,7 @@ Sample project that uses Spring framework and demonstrates REST api.
 ## Election Concepts
 The following concepts will be used in this sample.
 - Voters - People who are registered to vote.
-- Voting Locations - Pre-populated list of locations where votong takes place. Based on a voters post code where do they go to vote.
+- Voting Locations - Pre-populated list of locations where voting takes place. Voters are allocated to a location based on their postal code.
 - Riding - A collection of voting locations.
 - Candidates - What candidates can be voted for in a particular riding.
 - Parties - Parties that candidates belong to.
