@@ -11,7 +11,7 @@ The following concepts will be used in this sample.
 - Results - High level information of votes cast.  e.g. which Candidate won in the riding.  Percentage of voters that voted.
 
 ## Currently Supported Operations
-- Register a voter
+- Add a voter
 - Retrieve a voters information (based on name)
 - Update a voters information
 
@@ -22,7 +22,7 @@ To build the project do the following:
 ```
 
 ## Test
-Use curl to test the supported Requests
+Use curl to test the supported requests
 
 ### Add a voter
 ```
@@ -36,7 +36,12 @@ $ curl -X GET http://localhost:8080/voters?name=Kirsteen
 {"id":"59d3b98754405e21d5a22e1e","firstName":"Kirsteen","lastName":"lastName"}
 ```
 
-## Future Operations to be Supported
+## Future Considerations 
+- Dockerise
+- static code analysis
+- add cucumber tests
+
+## Operations to be Supported
 - Associate a voter to a voting location based on postal code.
 - Query all voters registered to vote at a particular location.
 - See what candidates are running for election in a particular riding.
