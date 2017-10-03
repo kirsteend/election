@@ -15,14 +15,16 @@ import java.util.List;
 public class VoterController {
 
     private Log log = LogFactory.getLog(this.getClass());
-
-    @Autowired
     private VoterService service;
+
+    public VoterController(final VoterService service){
+        this.service = service;
+    }
 
     @GetMapping(value = "/voters")
     public ResponseEntity<List<Voter>> getVoters(@RequestParam(value="name", required=false) String name) {
         final List<Voter> result = service.getVoters(name);
-        final HttpStatus status = (result == null) ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+        final HttpStatus status = (result.size() == 0) ? HttpStatus.NOT_FOUND : HttpStatus.OK;
         return new ResponseEntity<>(result, status);
     }
 

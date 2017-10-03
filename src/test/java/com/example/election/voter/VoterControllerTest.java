@@ -43,7 +43,7 @@ public class VoterControllerTest {
 
     @Test
     public void getVoterNotFound() {
-        when(service.getVoters(null)).thenReturn(null);
+        when(service.getVoters(null)).thenReturn(Collections.synchronizedList(new ArrayList<>()));
         ResponseEntity<List> response = this.restTemplate.getForEntity("/voters", List.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         verify(service).getVoters(null);
