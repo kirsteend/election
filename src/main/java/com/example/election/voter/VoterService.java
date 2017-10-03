@@ -5,6 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,26 +19,27 @@ public class VoterService {
 
     /**
      * Get a voter based on the given name.
+     * If no name is given a list of all voters will be returned.
      *
      * @param name - name of the voter to get.
      * @return Voter entity.
      */
-    public Voter getVoter(final String name) {
-        Voter voter = null;
+    public List<Voter> getVoters(final String name) {
+        final List<Voter> voters = Collections.synchronizedList(new ArrayList<Voter>());
         if(name != null) {
             log.debug("Search for voter by name");
-            voter = repository.findByFirstName(name);
+            Voter voter = repository.findByFirstName(name);
             if (voter != null) {
                 log.debug("voter found");
+                voters.add(voter);
             } else {
                 log.debug("voter not found");
             }
         } else {
             log.debug("Get all voters");
-            final List<Voter> voters = repository.findAll();
-            // TODO - to be implemented
+            return repository.findAll();
         }
-        return voter;
+        return voters;
     }
 
     /**

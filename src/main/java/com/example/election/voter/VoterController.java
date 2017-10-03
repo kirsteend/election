@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Controller
 public class VoterController {
@@ -18,8 +20,8 @@ public class VoterController {
     private VoterService service;
 
     @GetMapping(value = "/voters")
-    public ResponseEntity<Voter> getVoter(@RequestParam(value="name", required=false) String name) {
-        final Voter result = service.getVoter(name);
+    public ResponseEntity<List<Voter>> getVoters(@RequestParam(value="name", required=false) String name) {
+        final List<Voter> result = service.getVoters(name);
         final HttpStatus status = (result == null) ? HttpStatus.NOT_FOUND : HttpStatus.OK;
         return new ResponseEntity<>(result, status);
     }
