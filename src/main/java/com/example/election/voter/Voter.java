@@ -1,20 +1,22 @@
 package com.example.election.voter;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.example.election.poll.Poll;
+
+import javax.persistence.*;
 
 @Entity
 public class Voter {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public String id;
 
     public String name;
     public String postCode;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    public Poll poll;
 
     public Voter() {}
 
@@ -23,12 +25,20 @@ public class Voter {
         this.postCode = postCode;
     }
 
+    public void setPoll(Poll poll) {
+        this.poll = poll;
+    }
+
     public void setName(final String name){
         this.name = name;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getPostCode(){
+        return this.postCode;
     }
 
     @Override

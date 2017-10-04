@@ -19,7 +19,7 @@ The following concepts will be used in this sample.
 ## Supported Operations
 - Add Voters to the list of Electors
 - Retrieve a voters information (based on name)
-- Tell Voters where they should vote [WIP]
+- Tell Voters where they should vote
 - Add Candidates to the ballot [WIP]
 - Tell Voters who they can vote for [WIP]
 
@@ -38,8 +38,8 @@ Use curl to test the supported requests
 
 ### Add a voter
 ```
-$ curl -X POST http://localhost:8080/voters --header "Content-Type: application/json" --header "Accept: application/json" -d "{\"name\": \"Kirsteen\", \"postcode\": \"M2P 2H1\" }"
-{"id":"59d4e3bf54405e0443ba500a","name":"Kirsteen","postCode":"M2P 2H1"}
+$  curl -X POST http://localhost:8080/voters --header "Content-Type: application/json" --header "Accept: application/json" -d "{\"name\": \"Kirsteen\", \"postCode\": \"M2P 2H1\" }"
+  {"id":"3","name":"Kirsteen","postCode":"M2P 2H1","poll":{"id":"1","name":"main","address":"3 main street","postcode":"M2P 2H1"}}
 ```
 
 ### Retrieve a voter based on name

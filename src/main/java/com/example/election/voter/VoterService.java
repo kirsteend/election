@@ -1,8 +1,9 @@
 package com.example.election.voter;
 
+import com.example.election.poll.Poll;
+import com.example.election.poll.PollRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,8 +15,13 @@ public class VoterService {
 
     private Log log = LogFactory.getLog(this.getClass());
 
-    @Autowired
-    private VoterRepository repository;
+    private VoterRepository voterRepo;
+    private PollRepository pollRepo;
+
+    public VoterService(final VoterRepository voterRepo, final PollRepository pollRepo){
+        this.voterRepo = voterRepo;
+        this.pollRepo = pollRepo;
+    }
 
     /**
      * Get a voter based on the given name.
@@ -28,7 +34,7 @@ public class VoterService {
         final List<Voter> voters = Collections.synchronizedList(new ArrayList<Voter>());
         if(name != null) {
             log.debug("Search for voter by name");
-            Voter voter = repository.findByName(name);
+            Voter voter = voterRepo.findByName(name);
             if (voter != null) {
                 log.debug("voter found");
                 voters.add(voter);
@@ -37,13 +43,14 @@ public class VoterService {
             }
         } else {
             log.debug("Get all voters");
-            return repository.findAll();
+            return voterRepo.findAll();
         }
         return voters;
     }
 
     /**
      * Add a voter with the given name if they do not already exist.
+     * Assign them to a poll if one for their given post code exists.
      *
      * @param voter - voter to add.
      * @return Voter entity.
@@ -51,9 +58,15 @@ public class VoterService {
     public Voter addVoter(final Voter voter) {
         Voter voterEntity = null;
         if(voter != null && voter.getName() != null) {
-            voterEntity = repository.findByName(voter.getName());
+            voterEntity = voterRepo.findByName(voter.getName());
             if (voterEntity == null) {
-                voterEntity = repository.save(voter);
+                String postCode = voter.getPostCode();
+                if(postCode != null){
+                    Poll poll = pollRepo.findByPostCode(postCode);
+                    voter.setPoll(poll);
+                }
+
+                voterEntity = voterRepo.save(voter);
                 log.debug("added voter");
             } else {
                 log.debug("voter already exists");
@@ -74,11 +87,11 @@ public class VoterService {
         Voter result = null;
         if(name != null) {
             log.debug("Search for voter by name");
-            Voter voter = repository.findByName(name);
+            Voter voter = voterRepo.findByName(name);
             if (voter != null) {
                 log.debug("voter found");
                 voter.setName(newName);
-                result = repository.save(voter);
+                result = voterRepo.save(voter);
                 log.debug("voter updated");
             } else {
                 log.debug("voter not found");
