@@ -16,7 +16,7 @@ The following concepts will be used in this sample.
 - Parties - Parties that candidates belong to.
 - Results - High level information of votes cast.  e.g. which Candidate won in the riding.  Percentage of voters that voted.
 
-## Currently Supported Operations
+## Supported Operations
 - Add Voters to the list of Electors
 - Retrieve a voters information (based on name)
 - Tell Voters where they should vote [WIP]
@@ -52,10 +52,3 @@ Use curl to test the supported requests
 - Dockerise
 - static code analysis
 - add cucumber tests
-
-## Operations to be Supported
-- Associate a voter to a voting location based on postal code.
-- Query all voters registered to vote at a particular location.
-- See what candidates are running for election in a particular riding.
-
-
