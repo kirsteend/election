@@ -28,7 +28,7 @@ public class VoterService {
         final List<Voter> voters = Collections.synchronizedList(new ArrayList<Voter>());
         if(name != null) {
             log.debug("Search for voter by name");
-            Voter voter = repository.findByFirstName(name);
+            Voter voter = repository.findByName(name);
             if (voter != null) {
                 log.debug("voter found");
                 voters.add(voter);
@@ -50,8 +50,8 @@ public class VoterService {
      */
     public Voter addVoter(final Voter voter) {
         Voter voterEntity = null;
-        if(voter != null && voter.firstName != null) {
-            voterEntity = repository.findByFirstName(voter.firstName);
+        if(voter != null && voter.getName() != null) {
+            voterEntity = repository.findByName(voter.getName());
             if (voterEntity == null) {
                 voterEntity = repository.save(voter);
                 log.debug("added voter");
@@ -74,10 +74,10 @@ public class VoterService {
         Voter result = null;
         if(name != null) {
             log.debug("Search for voter by name");
-            Voter voter = repository.findByFirstName(name);
+            Voter voter = repository.findByName(name);
             if (voter != null) {
                 log.debug("voter found");
-                voter.setFirstName(newName);
+                voter.setName(newName);
                 result = repository.save(voter);
                 log.debug("voter updated");
             } else {

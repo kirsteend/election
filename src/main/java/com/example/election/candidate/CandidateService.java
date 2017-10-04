@@ -40,8 +40,8 @@ public class CandidateService {
      */
     public Candidate addCandidate(final Candidate candidate) {
         Candidate candidateEntity = null;
-        if(candidate != null && candidate.firstName != null) {
-            candidateEntity = repository.findByFirstName(candidate.firstName);
+        if(candidate != null && candidate.getName() != null) {
+            candidateEntity = repository.findByName(candidate.getName());
             if (candidateEntity == null) {
                 candidateEntity = repository.save(candidate);
                 log.debug("added candidate");

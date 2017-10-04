@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface VoterRepository extends MongoRepository<Voter, String> {
 
-    public Voter findByFirstName(String firstName);
-    public List<Voter> findByLastName(String lastName);
+    public Voter findByName(String name);
 
 }

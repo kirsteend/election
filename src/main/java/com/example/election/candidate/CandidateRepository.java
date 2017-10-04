@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CandidateRepository extends MongoRepository<Candidate, String> {
 
-    public Candidate findByFirstName(String firstName);
+    public Candidate findByName(String name);
     public List<Candidate> findByParty(String party);
 
 }

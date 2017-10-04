@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -32,7 +33,7 @@ public class VoterControllerTest {
     @Test
     public void getVoter() {
         final List<Voter> voters = Collections.synchronizedList(new ArrayList<Voter>());
-        voters.add(new Voter("John", "Smith", "M3C 0C1"));
+        voters.add(new Voter("John", "M3C 0C1"));
         when(service.getVoters("John")).thenReturn(voters);
         ResponseEntity<List> response = this.restTemplate.getForEntity("/voters?name=John", List.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -48,24 +49,28 @@ public class VoterControllerTest {
     }
 
     @Test
-    @Ignore
     public void addVoter() {
-        Voter voter = new Voter("John", "Smith", "M3C 0C1");
-        when(service.addVoter(voter)).thenReturn(voter);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        HttpEntity<Voter> entity = new HttpEntity<>(voter, headers);
+        Voter voter = new Voter("John", "M3C 0C1");
+        when(service.addVoter(any(Voter.class))).thenReturn(voter);
 
-        ResponseEntity<Voter> response = restTemplate.exchange("/voters", HttpMethod.POST, entity, Voter.class);
-        //ResponseEntity<Voter> response = this.restTemplate.postForEntity("/voters", voter, Voter.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<?> requestEntity = new HttpEntity<>("{\"name\": \"John\", \"postcode\": \"M3C 0C1\" }", headers);
+
+        ResponseEntity<Voter> response = restTemplate.exchange("/voters", HttpMethod.POST, requestEntity, Voter.class);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        verify(service).addVoter(voter);
+        verify(service).addVoter(any(Voter.class));
     }
 
     @Test
-    @Ignore
     public void addVoterError() {
-        ResponseEntity<Voter> response = this.restTemplate.postForEntity("/voters", null, Voter.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<?> requestEntity = new HttpEntity<>(null, headers);
+
+        ResponseEntity<Voter> response = this.restTemplate.postForEntity("/voters", requestEntity, Voter.class);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 

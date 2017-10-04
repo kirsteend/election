@@ -8,25 +8,31 @@ public class Voter {
     @Id
     public String id;
 
-    public String firstName;
-    public String lastName;
+    public String name;
     public String postCode;
 
     public Voter() {}
 
-    public Voter(final String firstName, final String lastName, final String postCode) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Voter(final String name, final String postCode) {
+        this.name = name;
         this.postCode = postCode;
     }
 
-    public void setFirstName(final String firstName){
-        this.firstName = firstName;
+    public void setName(final String name){
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setId(String id){
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return String.format(
-          "Voter[id=%s, firstName='%s', lastName='%s', postCode='%s']", id, firstName, lastName, postCode);
+          "Voter[id=%s, name='%s', postCode='%s']", id, name, postCode);
     }
 }
