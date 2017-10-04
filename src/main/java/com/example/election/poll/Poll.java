@@ -13,6 +13,8 @@ public class Poll {
     public String address;
     public List<String> postalCodes;
 
+    public Poll() {}
+
     public Poll(final String name, final String address, final List<String> postalCodes) {
         this.name = name;
         this.address = address;

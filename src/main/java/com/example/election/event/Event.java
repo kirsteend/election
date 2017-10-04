@@ -12,6 +12,8 @@ public class Event {
     public Instant startDate;
     public Instant endDate;
 
+    public Event() {}
+
     public Event(final String name, final Instant startDate, final Instant endDate) {
         this.name = name;
         this.startDate = startDate;

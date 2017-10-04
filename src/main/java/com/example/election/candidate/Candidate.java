@@ -12,6 +12,8 @@ public class Candidate {
     public String riding;
     public String party;
 
+    public Candidate() {}
+
     public Candidate(final String firstName, final String lastName, final String riding, final String party) {
         this.firstName = firstName;
         this.lastName = lastName;

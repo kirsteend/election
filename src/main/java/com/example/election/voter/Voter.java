@@ -12,6 +12,8 @@ public class Voter {
     public String lastName;
     public String postCode;
 
+    public Voter() {}
+
     public Voter(final String firstName, final String lastName, final String postCode) {
         this.firstName = firstName;
         this.lastName = lastName;
