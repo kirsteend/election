@@ -71,6 +71,8 @@ public class VoterService {
             } else {
                 log.debug("voter already exists");
             }
+        } else {
+            log.debug("voter name missing");
         }
 
         return voterEntity;

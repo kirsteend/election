@@ -2,6 +2,7 @@ package com.example.election.voter;
 
 import com.example.election.poll.Poll;
 import com.example.election.poll.PollRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,14 @@ public class VoterServiceTest {
 
     private final Voter testVoter = new Voter("John","M3C 0C1");
     private final Voter testVoterWithPoll = new Voter("John","M3C 0C1");
+    private final Voter testVoterNoPostCode = new Voter("John",null);
+    private final Voter testVoterNoName = new Voter(null,null);
     private final Poll testPoll = new Poll("main", "2 main street", "M3C 0C1");
+
+    @Before
+    public void setUp() throws Exception {
+        testVoterWithPoll.setPoll(testPoll);
+    }
 
     @Test
     public void getVotersFound() throws Exception {
@@ -76,7 +84,6 @@ public class VoterServiceTest {
     public void addNewVoter() throws Exception {
         when(mockVoterRepo.findByName("John")).thenReturn(null);
         when(mockPollRepo.findByPostCode("M3C 0C1")).thenReturn(testPoll);
-        testVoterWithPoll.setPoll(testPoll);
         when(mockVoterRepo.save(testVoter)).thenReturn(testVoterWithPoll);
         Voter voter =  service.addVoter(testVoter);
         assertNotNull(voter);
@@ -86,11 +93,51 @@ public class VoterServiceTest {
     }
 
     @Test
+    public void addNewVoterNoPostCode() throws Exception {
+        when(mockVoterRepo.findByName("John")).thenReturn(null);
+        when(mockVoterRepo.save(testVoterNoPostCode)).thenReturn(testVoterNoPostCode);
+        Voter voter =  service.addVoter(testVoterNoPostCode);
+        assertNotNull(voter);
+        verify(mockVoterRepo).findByName("John");
+        verify(mockVoterRepo).save(testVoterNoPostCode);
+    }
+
+    @Test
+    public void addNewVoterNoName() throws Exception {
+        Voter voter =  service.addVoter(testVoterNoName);
+        assertNull(voter);
+    }
+
+    @Test
     public void addVoterAlreadyExists() throws Exception {
+        when(mockVoterRepo.findByName("John")).thenReturn(testVoterWithPoll);
+        Voter voter =  service.addVoter(testVoter);
+        assertNotNull(voter);
+        verify(mockVoterRepo).findByName("John");
     }
 
     @Test
     public void updateVoter() throws Exception {
+        when(mockVoterRepo.findByName("John")).thenReturn(testVoterWithPoll);
+        when(mockVoterRepo.save(testVoterWithPoll)).thenReturn(testVoterWithPoll);
+        Voter voter =  service.updateVoter("John", "James");
+        assertNotNull(voter);
+        verify(mockVoterRepo).findByName("John");
+        verify(mockVoterRepo).save(testVoterWithPoll);
+    }
+
+    @Test
+    public void updateVoterNull() throws Exception {
+        when(mockVoterRepo.findByName("John")).thenReturn(null);
+        Voter voter =  service.updateVoter("John", "James");
+        assertNull(voter);
+        verify(mockVoterRepo).findByName("John");
+    }
+
+    @Test
+    public void updateVoterNoName() throws Exception {
+        Voter voter =  service.updateVoter(null, "James");
+        assertNull(voter);
     }
 
 }
