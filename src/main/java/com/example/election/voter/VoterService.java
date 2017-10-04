@@ -62,7 +62,7 @@ public class VoterService {
             if (voterEntity == null) {
                 String postCode = voter.getPostCode();
                 if(postCode != null){
-                    Poll poll = pollRepo.findByPostCode(postCode);
+                    Poll poll = pollRepo.findByPostcode(postCode);
                     voter.setPoll(poll);
                 }
 

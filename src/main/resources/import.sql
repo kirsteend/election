@@ -1,1 +1,2 @@
-INSERT INTO poll (id, name, address, postcode) VALUES ('1', 'main', '3 main street', 'M2P 2H1'), ('2', 'park', '3 park road', 'M3C 0C1');
+INSERT INTO poll (id, name, address, postcode) VALUES ('1', 'main', '3 main street', 'M2P 2H1'), ('2', 'park', '3 park road', 'M3C 0C1')
+INSERT INTO party (id, name) VALUES ('1', 'fun'), ('2', 'serious')
