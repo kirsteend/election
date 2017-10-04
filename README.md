@@ -3,7 +3,7 @@ Sample project that uses Spring framework and demonstrates REST api.
 
 ## Demonstrates
 - Spring REST api (GET, POST, PUT)
-- mongo repository
+- jpa repository
 - code coverage with jacoco
 - sample jenkins pipeline
 

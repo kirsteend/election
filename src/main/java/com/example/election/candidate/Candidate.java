@@ -1,11 +1,14 @@
 package com.example.election.candidate;
 
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Candidate {
 
     @Id
-    public String id;
+    private String id;
 
     public String name;
     public String riding;

@@ -1,10 +1,9 @@
 package com.example.election.voter;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 
-public interface VoterRepository extends MongoRepository<Voter, String> {
+public interface VoterRepository extends JpaRepository<Voter, String> {
 
     public Voter findByName(String name);
 

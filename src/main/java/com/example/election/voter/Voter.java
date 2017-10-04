@@ -1,11 +1,16 @@
 package com.example.election.voter;
 
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Voter {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     public String id;
 
     public String name;
