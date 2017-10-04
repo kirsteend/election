@@ -32,7 +32,7 @@ public class VoterService {
      */
     public List<Voter> getVoters(final String name) {
         final List<Voter> voters = Collections.synchronizedList(new ArrayList<Voter>());
-        if(name != null) {
+        if(name != null && name.length() > 0) {
             log.debug("Search for voter by name");
             Voter voter = voterRepo.findByName(name);
             if (voter != null) {
