@@ -26,7 +26,7 @@ public class Candidate {
     @Override
     public String toString() {
         return String.format(
-          "Candidate[id=%s, name='%s', lastName='%s', riding='%s', party='%s']", id, name, riding, party);
+          "Candidate[id=%s, name='%s', riding='%s', party='%s']", id, name, riding, party);
     }
 
 }

@@ -10,19 +10,19 @@ public class Poll {
 
     public String name;
     public String address;
-    public String postalCode;
+    public String postCode;
 
     public Poll() {}
 
-    public Poll(final String name, final String address, final String postalCode) {
+    public Poll(final String name, final String address, final String postCode) {
         this.name = name;
         this.address = address;
-        this.postalCode = postalCode;
+        this.postCode = postCode;
     }
 
     @Override
     public String toString() {
         return String.format(
-          "Poll[id=%s, name='%s', address='%s', postCode='%s']", id, name, address, postalCode);
+          "Poll[id=%s, name='%s', address='%s', postCode='%s']", id, name, address, postCode);
     }
 }

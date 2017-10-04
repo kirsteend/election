@@ -26,10 +26,6 @@ public class Voter {
         return name;
     }
 
-    public void setId(String id){
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return String.format(
