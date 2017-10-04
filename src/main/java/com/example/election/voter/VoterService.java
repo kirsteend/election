@@ -45,19 +45,22 @@ public class VoterService {
     /**
      * Add a voter with the given name if they do not already exist.
      *
-     * @param name - name of voter to add.
+     * @param voter - voter to add.
      * @return Voter entity.
      */
-    public Voter addVoter(final String name) {
-        Voter voter = repository.findByFirstName(name);
-        if(voter == null){
-            voter = repository.save(new Voter(name, "lastName"));
-            log.debug("added voter");
-        } else {
-            log.debug("voter already exists");
+    public Voter addVoter(final Voter voter) {
+        Voter voterEntity = null;
+        if(voter != null && voter.firstName != null) {
+            voterEntity = repository.findByFirstName(voter.firstName);
+            if (voterEntity == null) {
+                voterEntity = repository.save(voter);
+                log.debug("added voter");
+            } else {
+                log.debug("voter already exists");
+            }
         }
 
-        return voter;
+        return voterEntity;
     }
 
     /**

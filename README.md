@@ -1,6 +1,10 @@
 # Election
 Sample project that uses Spring framework and demonstrates REST api.
 
+## Demonstrates
+- Spring REST api (GET, POST, PUT)
+- mongo repository
+
 ## Election Concepts
 The following concepts will be used in this sample.
 - Voters - People who are registered to vote.
