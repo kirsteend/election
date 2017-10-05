@@ -68,8 +68,10 @@ public class VoterServiceImpl implements VoterService {
         Voter voterEntity = voterRepo.findByName(voter.getName());
         if (voterEntity == null) {
             String postCode = voter.getPostCode();
+            log.debug(String.format("postCode: %s", postCode));
             if(postCode != null){
                 Poll poll = pollRepo.findByPostcode(postCode);
+                log.debug(String.format("poll: %s", poll.toString()));
                 voter.setPoll(poll);
             }
 
