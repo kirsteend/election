@@ -1,5 +1,6 @@
-package com.example.election.poll;
+package com.example.election.service;
 
+import com.example.election.domain.Poll;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

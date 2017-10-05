@@ -1,4 +1,4 @@
-package com.example.election.party;
+package com.example.election.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

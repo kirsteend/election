@@ -1,7 +1,10 @@
 package com.example.election.voter;
 
-import com.example.election.poll.Poll;
-import com.example.election.poll.PollRepository;
+import com.example.election.domain.Voter;
+import com.example.election.domain.Poll;
+import com.example.election.service.PollRepository;
+import com.example.election.service.VoterRepository;
+import com.example.election.service.impl.VoterServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +31,7 @@ public class VoterServiceTest {
     PollRepository mockPollRepo;
 
     @Autowired
-    VoterService service;
+    VoterServiceImpl service;
 
     private final Voter testVoter = new Voter("John","M3C 0C1");
     private final Voter testVoterWithPoll = new Voter("John","M3C 0C1");
@@ -83,12 +86,12 @@ public class VoterServiceTest {
     @Test
     public void addNewVoter() throws Exception {
         when(mockVoterRepo.findByName("John")).thenReturn(null);
-        when(mockPollRepo.findByPostCode("M3C 0C1")).thenReturn(testPoll);
+        when(mockPollRepo.findByPostcode("M3C 0C1")).thenReturn(testPoll);
         when(mockVoterRepo.save(testVoter)).thenReturn(testVoterWithPoll);
         Voter voter =  service.addVoter(testVoter);
         assertNotNull(voter);
         verify(mockVoterRepo).findByName("John");
-        verify(mockPollRepo).findByPostCode("M3C 0C1");
+        verify(mockPollRepo).findByPostcode("M3C 0C1");
         verify(mockVoterRepo).save(testVoter);
     }
 

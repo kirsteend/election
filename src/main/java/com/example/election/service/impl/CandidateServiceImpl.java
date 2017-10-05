@@ -1,5 +1,8 @@
-package com.example.election.candidate;
+package com.example.election.service.impl;
 
+import com.example.election.domain.Candidate;
+import com.example.election.service.CandidateRepository;
+import com.example.election.service.CandidateService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
@@ -7,13 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CandidateService {
+public class CandidateServiceImpl implements CandidateService {
 
     private Log log = LogFactory.getLog(this.getClass());
 
     private CandidateRepository candidateRepo;
 
-    public CandidateService(final CandidateRepository candidateRepo){
+    public CandidateServiceImpl(final CandidateRepository candidateRepo){
         this.candidateRepo = candidateRepo;
     }
 
@@ -24,6 +27,7 @@ public class CandidateService {
      * @param partyName - partyName of the candidate to get.
      * @return Candidate entity.
      */
+    @Override
     public List<Candidate> getCandidates(final String partyName) {
         if(partyName != null) {
             log.debug("Search for candidate by name");
@@ -40,6 +44,7 @@ public class CandidateService {
      * @param candidate - candidate to add.
      * @return Candidate entity.
      */
+    @Override
     public Candidate addCandidate(final Candidate candidate) {
         Candidate candidateEntity = null;
         if(candidate != null && candidate.getName() != null) {

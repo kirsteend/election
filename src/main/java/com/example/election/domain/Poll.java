@@ -1,4 +1,4 @@
-package com.example.election.poll;
+package com.example.election.domain;
 
 
 import javax.persistence.*;

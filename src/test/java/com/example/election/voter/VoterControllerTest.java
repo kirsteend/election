@@ -1,5 +1,7 @@
 package com.example.election.voter;
 
+import com.example.election.domain.Voter;
+import com.example.election.service.VoterService;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,7 +80,7 @@ public class VoterControllerTest {
     @Ignore
     public void updateVoter() {
         when(service.getVoters("")).thenReturn(null);
-        //TODO - update put to take voter request entity
+        //TODO
         ResponseEntity<Voter> response = this.restTemplate.exchange("/voters", HttpMethod.PUT, null, Voter.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }

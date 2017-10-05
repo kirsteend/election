@@ -1,7 +1,5 @@
-package com.example.election.voter;
+package com.example.election.domain;
 
-
-import com.example.election.poll.Poll;
 
 import javax.persistence.*;
 

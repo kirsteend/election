@@ -1,7 +1,4 @@
-package com.example.election.riding;
-
-import com.example.election.candidate.Candidate;
-import com.example.election.poll.Poll;
+package com.example.election.domain;
 
 import javax.persistence.*;
 import java.util.List;

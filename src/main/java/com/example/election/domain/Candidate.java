@@ -1,4 +1,4 @@
-package com.example.election.candidate;
+package com.example.election.domain;
 
 
 import javax.persistence.Entity;

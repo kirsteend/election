@@ -1,7 +1,10 @@
-package com.example.election.voter;
+package com.example.election.service.impl;
 
-import com.example.election.poll.Poll;
-import com.example.election.poll.PollRepository;
+import com.example.election.domain.Poll;
+import com.example.election.domain.Voter;
+import com.example.election.service.PollRepository;
+import com.example.election.service.VoterRepository;
+import com.example.election.service.VoterService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
@@ -11,14 +14,14 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class VoterService {
+public class VoterServiceImpl implements VoterService {
 
     private Log log = LogFactory.getLog(this.getClass());
 
     private VoterRepository voterRepo;
     private PollRepository pollRepo;
 
-    public VoterService(final VoterRepository voterRepo, final PollRepository pollRepo){
+    public VoterServiceImpl(final VoterRepository voterRepo, final PollRepository pollRepo){
         this.voterRepo = voterRepo;
         this.pollRepo = pollRepo;
     }
@@ -30,6 +33,7 @@ public class VoterService {
      * @param name - name of the voter to get.
      * @return Voter entity.
      */
+    @Override
     public List<Voter> getVoters(final String name) {
         final List<Voter> voters = Collections.synchronizedList(new ArrayList<Voter>());
         if(name != null && name.length() > 0) {
@@ -55,6 +59,7 @@ public class VoterService {
      * @param voter - voter to add.
      * @return Voter entity.
      */
+    @Override
     public Voter addVoter(final Voter voter) {
         Voter voterEntity = null;
         if(voter != null && voter.getName() != null) {
@@ -85,6 +90,7 @@ public class VoterService {
      * @param newName - new name
      * @return voter entity
      */
+    @Override
     public Voter updateVoter(final String name, final String newName) {
         Voter result = null;
         if(name != null) {
