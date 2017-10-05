@@ -33,11 +33,14 @@ public class ElectionApplicationTests {
 		String partyToString = "Party[id='null', name='fun']";
 		assertEquals(partyToString, party.toString());
 
-		Candidate candidate = new Candidate("Sam", new Party("fun"));
-		assertEquals(String.format("Candidate[id='null', name='Sam', party='%s']",partyToString), candidate.toString());
+		String pollToString = "Poll[id='null', name='main', address='3 main street', postcode='M2P 2H1']";
+        Poll poll = new Poll("main", "3 main street", "M2P 2H1");
+        assertEquals(pollToString, poll.toString());
 
-		Poll poll = new Poll("main", "3 main street", "M2P 2H1");
-		assertEquals("Poll[id='null', name='main', address='3 main street', postcode='M2P 2H1']", poll.toString());
+		Candidate candidate = new Candidate("Sam", party, poll);
+		assertEquals(String.format("Candidate[id='null', name='Sam', party='%s', poll='%s']", partyToString, pollToString),
+        candidate.toString());
+
 	}
 
 }

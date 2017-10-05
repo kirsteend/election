@@ -10,5 +10,5 @@ public interface CandidateRepository extends JpaRepository<Candidate, String> {
 
     Candidate findByName(String name);
     List<Candidate> findCandidatesByPartyName(String party);
-
+    List<Candidate> findCandidatesByPollName(String poll);
 }

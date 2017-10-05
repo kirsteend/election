@@ -19,28 +19,25 @@ public class Candidate implements Serializable {
     @ManyToOne(optional = false)
     private Party party;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Poll poll;
 
     public Candidate() {}
 
-    public Candidate(final String name, final Party party) {
+    public Candidate(final String name, final Party party, final Poll poll) {
         this.name = name;
         this.party = party;
+        this.poll = poll;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setPoll(final Poll poll) {
-        this.poll = poll;
-    }
-
     @Override
     public String toString() {
         return String.format(
-          "Candidate[id='%s', name='%s', party='%s']", id, name, party.toString());
+          "Candidate[id='%s', name='%s', party='%s', poll='%s']", id, name, party.toString(), poll.toString());
     }
 
 }

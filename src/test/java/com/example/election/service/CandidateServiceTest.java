@@ -2,6 +2,7 @@ package com.example.election.service;
 
 import com.example.election.domain.Candidate;
 import com.example.election.domain.Party;
+import com.example.election.domain.Poll;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,9 @@ public class CandidateServiceTest {
     @Autowired
     CandidateService service;
 
-    private final Candidate testCandidate = new Candidate("Sam", new Party("fun"));
+    private final Poll testPoll = new Poll("main", "2 main street", "M3C 0C1");
+    private final Party testParty = new Party("fun");
+    private final Candidate testCandidate = new Candidate("Sam", testParty, testPoll);
 
     @Test
     public void getCandidates() throws Exception {
