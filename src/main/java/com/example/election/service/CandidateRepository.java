@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CandidateRepository extends JpaRepository<Candidate, String> {
 
-    public Candidate findByName(String name);
-    public List<Candidate> findByParty(String party);
+    Candidate findByName(String name);
+    List<Candidate> findByParty(String party);
 
 }

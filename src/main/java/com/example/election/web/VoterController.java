@@ -32,8 +32,7 @@ public class VoterController {
     @PostMapping(value = "/voters")
     public ResponseEntity<Voter> addVoter(@RequestBody Voter voter) {
         final Voter result = service.addVoter(voter);
-        final HttpStatus status = (result == null) ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
-        return new ResponseEntity<>(result, status);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/voters")

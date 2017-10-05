@@ -2,7 +2,6 @@ package com.example.election.service;
 
 import com.example.election.domain.Voter;
 import com.example.election.domain.Poll;
-import com.example.election.service.impl.VoterServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +28,7 @@ public class VoterServiceTest {
     PollRepository mockPollRepo;
 
     @Autowired
-    VoterServiceImpl service;
+    VoterService service;
 
     private final Voter testVoter = new Voter("John","M3C 0C1");
     private final Voter testVoterWithPoll = new Voter("John","M3C 0C1");
@@ -103,10 +102,9 @@ public class VoterServiceTest {
         verify(mockVoterRepo).save(testVoterNoPostCode);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void addNewVoterNoName() throws Exception {
-        Voter voter =  service.addVoter(testVoterNoName);
-        assertNull(voter);
+        service.addVoter(testVoterNoName);
     }
 
     @Test
@@ -129,16 +127,14 @@ public class VoterServiceTest {
 
     @Test
     public void updateVoterNull() throws Exception {
-        when(mockVoterRepo.findByName("John")).thenReturn(null);
         Voter voter =  service.updateVoter("John", "James");
         assertNull(voter);
         verify(mockVoterRepo).findByName("John");
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void updateVoterNoName() throws Exception {
-        Voter voter =  service.updateVoter(null, "James");
-        assertNull(voter);
+        service.updateVoter(null, "James");
     }
 
 }

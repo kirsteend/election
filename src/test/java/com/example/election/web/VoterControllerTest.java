@@ -32,10 +32,13 @@ public class VoterControllerTest {
     @MockBean
     private VoterService service;
 
+    private final Voter testVoter = new Voter("John","M3C 0C1");
+    private final Voter testUpdatedVoter = new Voter("James","M3C 0C1");
+
     @Test
     public void getVoter() {
         final List<Voter> voters = Collections.synchronizedList(new ArrayList<Voter>());
-        voters.add(new Voter("John", "M3C 0C1"));
+        voters.add(testVoter);
         when(service.getVoters("John")).thenReturn(voters);
         ResponseEntity<List> response = this.restTemplate.getForEntity("/voters?name=John", List.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -52,8 +55,7 @@ public class VoterControllerTest {
 
     @Test
     public void addVoter() {
-        Voter voter = new Voter("John", "M3C 0C1");
-        when(service.addVoter(any(Voter.class))).thenReturn(voter);
+        when(service.addVoter(any(Voter.class))).thenReturn(testVoter);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -77,12 +79,21 @@ public class VoterControllerTest {
     }
 
     @Test
-    @Ignore
-    public void updateVoter() {
-        when(service.getVoters("")).thenReturn(null);
-        //TODO
-        ResponseEntity<Voter> response = this.restTemplate.exchange("/voters", HttpMethod.PUT, null, Voter.class);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    public void updateVoterOk() {
+        when(service.updateVoter("John","James")).thenReturn(testUpdatedVoter);
+        ResponseEntity<Voter> response = this.restTemplate.exchange("/voters?name=John&newName=James", HttpMethod.PUT,
+                null, Voter.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        verify(service).updateVoter("John","James");
+    }
+
+    @Test
+    public void updateVoterBadRequest() {
+        when(service.updateVoter("John","James")).thenReturn(null);
+        ResponseEntity<Voter> response = this.restTemplate.exchange("/voters?name=John&newName=James", HttpMethod.PUT,
+                null, Voter.class);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        verify(service).updateVoter("John","James");
     }
 
 }

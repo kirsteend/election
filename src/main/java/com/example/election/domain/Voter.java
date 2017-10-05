@@ -2,15 +2,21 @@ package com.example.election.domain;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Voter {
+public class Voter implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public String id;
 
+    @Column(nullable = false)
     public String name;
+
+    @Column(nullable = false)
     public String postCode;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -42,6 +48,6 @@ public class Voter {
     @Override
     public String toString() {
         return String.format(
-          "Voter[id=%s, name='%s', postCode='%s']", id, name, postCode);
+          "Voter[id='%s', name='%s', postCode='%s']", id, name, postCode);
     }
 }

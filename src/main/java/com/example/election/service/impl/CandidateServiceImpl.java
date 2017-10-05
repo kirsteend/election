@@ -6,6 +6,7 @@ import com.example.election.service.CandidateService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class CandidateServiceImpl implements CandidateService {
      */
     @Override
     public List<Candidate> getCandidates(final String partyName) {
-        if(partyName != null) {
+        if(partyName != null && partyName.length() > 0) {
             log.debug("Search for candidate by name");
             return candidateRepo.findByParty(partyName);
         } else {
@@ -46,18 +47,18 @@ public class CandidateServiceImpl implements CandidateService {
      */
     @Override
     public Candidate addCandidate(final Candidate candidate) {
-        Candidate candidateEntity = null;
-        if(candidate != null && candidate.getName() != null) {
-            candidateEntity = candidateRepo.findByName(candidate.getName());
-            if (candidateEntity == null) {
-                candidateEntity = candidateRepo.save(candidate);
-                log.debug("added candidate");
-            } else {
-                log.debug("candidate already exists");
-            }
+        Assert.notNull(candidate, "candidate must not be null");
+        Assert.notNull(candidate.getName(), "candidate name must not be null");
+
+        Candidate candidateEntity = candidateRepo.findByName(candidate.getName());
+        if (candidateEntity == null) {
+            log.debug("add candidate");
+            return candidateRepo.save(candidate);
+        } else {
+            log.debug("candidate already exists");
+            return candidateEntity;
         }
 
-        return candidateEntity;
     }
 
 }

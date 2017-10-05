@@ -8,6 +8,7 @@ import com.example.election.service.VoterService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,25 +62,22 @@ public class VoterServiceImpl implements VoterService {
      */
     @Override
     public Voter addVoter(final Voter voter) {
-        Voter voterEntity = null;
-        if(voter != null && voter.getName() != null) {
-            voterEntity = voterRepo.findByName(voter.getName());
-            if (voterEntity == null) {
-                String postCode = voter.getPostCode();
-                if(postCode != null){
-                    Poll poll = pollRepo.findByPostcode(postCode);
-                    voter.setPoll(poll);
-                }
+        Assert.notNull(voter, "voter must not be null");
+        Assert.notNull(voter.getName(), "voter name must not be null");
 
-                voterEntity = voterRepo.save(voter);
-                log.debug("added voter");
-            } else {
-                log.debug("voter already exists");
+        Voter voterEntity = voterRepo.findByName(voter.getName());
+        if (voterEntity == null) {
+            String postCode = voter.getPostCode();
+            if(postCode != null){
+                Poll poll = pollRepo.findByPostcode(postCode);
+                voter.setPoll(poll);
             }
-        } else {
-            log.debug("voter name missing");
-        }
 
+            voterEntity = voterRepo.save(voter);
+            log.debug("added voter");
+        } else {
+            log.debug("voter already exists");
+        }
         return voterEntity;
     }
 
@@ -92,19 +90,16 @@ public class VoterServiceImpl implements VoterService {
      */
     @Override
     public Voter updateVoter(final String name, final String newName) {
-        Voter result = null;
-        if(name != null) {
-            log.debug("Search for voter by name");
-            Voter voter = voterRepo.findByName(name);
-            if (voter != null) {
-                log.debug("voter found");
-                voter.setName(newName);
-                result = voterRepo.save(voter);
-                log.debug("voter updated");
-            } else {
-                log.debug("voter not found");
-            }
+        Assert.notNull(name, "name must not be null");
+
+        log.debug("Search for voter by name");
+        Voter voter = voterRepo.findByName(name);
+        if (voter != null) {
+            log.debug("voter found");
+            voter.setName(newName);
+            return voterRepo.save(voter);
+        } else {
+            return null;
         }
-        return result;
     }
 }
