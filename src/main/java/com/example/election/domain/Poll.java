@@ -3,6 +3,7 @@ package com.example.election.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class Poll implements Serializable {
@@ -21,6 +22,9 @@ public class Poll implements Serializable {
 
     @Column(nullable = false)
     public String postcode;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "poll")
+    private Set<Candidate> candidates;
 
     public Poll() {}
 

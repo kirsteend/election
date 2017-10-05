@@ -9,6 +9,6 @@ import java.util.List;
 public interface CandidateRepository extends JpaRepository<Candidate, String> {
 
     Candidate findByName(String name);
-    List<Candidate> findByParty(String party);
+    List<Candidate> findCandidatesByPartyName(String party);
 
 }

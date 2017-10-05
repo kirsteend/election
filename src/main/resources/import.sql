@@ -5,3 +5,7 @@ INSERT INTO poll (id, name, address, postcode) VALUES ('2', 'park', '3 park road
 -- parties
 INSERT INTO party (id, name) VALUES ('1', 'fun')
 INSERT INTO party (id, name) VALUES ('2', 'serious')
+
+-- candidates
+INSERT INTO candidate (id, name, party_id) VALUES ('1', 'Sam', '1')
+INSERT INTO candidate (id, name, party_id) VALUES ('2', 'Joe', '2')

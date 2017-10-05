@@ -19,6 +19,9 @@ public class Candidate implements Serializable {
     @ManyToOne(optional = false)
     private Party party;
 
+    @ManyToOne
+    private Poll poll;
+
     public Candidate() {}
 
     public Candidate(final String name, final Party party) {
@@ -28,6 +31,10 @@ public class Candidate implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public void setPoll(final Poll poll) {
+        this.poll = poll;
     }
 
     @Override

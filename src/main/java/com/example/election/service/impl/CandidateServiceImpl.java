@@ -31,8 +31,8 @@ public class CandidateServiceImpl implements CandidateService {
     @Override
     public List<Candidate> getCandidates(final String partyName) {
         if(partyName != null && partyName.length() > 0) {
-            log.debug("Search for candidate by name");
-            return candidateRepo.findByParty(partyName);
+            log.debug("Search for candidate by party name");
+            return candidateRepo.findCandidatesByPartyName(partyName);
         } else {
             log.debug("Get all candidates");
             return candidateRepo.findAll();

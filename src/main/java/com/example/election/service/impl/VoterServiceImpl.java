@@ -2,6 +2,7 @@ package com.example.election.service.impl;
 
 import com.example.election.domain.Poll;
 import com.example.election.domain.Voter;
+import com.example.election.service.CandidateRepository;
 import com.example.election.service.PollRepository;
 import com.example.election.service.VoterRepository;
 import com.example.election.service.VoterService;
@@ -21,10 +22,12 @@ public class VoterServiceImpl implements VoterService {
 
     private VoterRepository voterRepo;
     private PollRepository pollRepo;
+    private CandidateRepository cRepo;
 
-    public VoterServiceImpl(final VoterRepository voterRepo, final PollRepository pollRepo){
+    public VoterServiceImpl(final VoterRepository voterRepo, final PollRepository pollRepo, final CandidateRepository cRepo){
         this.voterRepo = voterRepo;
         this.pollRepo = pollRepo;
+        this.cRepo = cRepo;
     }
 
     /**

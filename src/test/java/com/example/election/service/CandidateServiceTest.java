@@ -30,11 +30,11 @@ public class CandidateServiceTest {
 
     @Test
     public void getCandidates() throws Exception {
-        when(mockCandidateRepo.findByParty("fun")).thenReturn(Collections.singletonList(testCandidate));
+        when(mockCandidateRepo.findCandidatesByPartyName("fun")).thenReturn(Collections.singletonList(testCandidate));
         List<Candidate> candidates =  service.getCandidates("fun");
         assertNotNull(candidates);
         assertEquals(1, candidates.size());
-        verify(mockCandidateRepo).findByParty("fun");
+        verify(mockCandidateRepo).findCandidatesByPartyName("fun");
     }
 
     @Test

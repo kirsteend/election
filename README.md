@@ -10,18 +10,14 @@ Sample project that uses Spring framework and demonstrates REST api.
 ## Election Concepts
 The following concepts will be used in this sample.
 - Voters - People who are registered to vote.
-- Voting Locations - Pre-populated list of locations where voting takes place. Voters are allocated to a location based on their postal code.
-- Riding - A collection of voting locations.
-- Candidates - What candidates can be voted for in a particular riding.
-- Parties - Parties that candidates belong to.
-- Results - High level information of votes cast.  e.g. which Candidate won in the riding.  Percentage of voters that voted.
+- Poll - Pre-populated list of locations where voting takes place. Voters are allocated to a poll based on their postal code.
+- Candidates - What candidates can be voted for at a particular poll.
+- Parties - Group that candidates belong to.
 
 ## Supported Operations
-- Add Voters to the list of Electors
-- Retrieve a voters information (based on name)
-- Tell Voters where they should vote
-- Add Candidates to the ballot [WIP]
-- Tell Voters who they can vote for [WIP]
+- Add voters to the list of electors.
+- Retrieve a voters information (based on name).
+- Tell voters where they should vote.
 
 ## Usage
 To build the project do the following:
@@ -55,5 +51,7 @@ $ curl -X GET http://localhost:8080/voters
 ```
 
 ## Future Considerations 
+- Add candidates to the ballot using kafka [WIP]
+- Query what candidates are on the ballot at a particular location [WIP]
 - Dockerise
-- add cucumber tests
+- Add cucumber tests
