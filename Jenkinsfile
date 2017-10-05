@@ -7,14 +7,14 @@ try {
 
             sh 'chmod 755 ./gradlew'
             sh './gradlew clean build'
-            step([$class: 'JUnitResultArchiver', testResults: '**/test-results/TEST-*.xml'])
+            step([$class: 'JUnitResultArchiver', testResults: '**/test-results/test/TEST-*.xml'])
         }
         stage('Test') {
             echo 'Running Tests....'
             //sh './gradlew bootRun'
             //sh './gradlew cucumberTests'
 
-            step([$class: 'JUnitResultArchiver', testResults: '**/cucumber-test-results/TEST-*.xml'])
+            //step([$class: 'JUnitResultArchiver', testResults: '**/cucumber-test-results/TEST-*.xml'])
             step([$class: 'JacocoPublisher', execPattern:'build/jacoco/test.exec', classPattern: 'build/classes/main',
                  sourcePattern: 'src/main/java'])
         }
