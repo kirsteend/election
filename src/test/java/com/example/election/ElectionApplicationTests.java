@@ -18,7 +18,6 @@ import static org.junit.Assert.assertTrue;
 @AutoConfigureMockMvc
 public class ElectionApplicationTests {
 
-
 	@Test
 	public void contextLoads() {
 		ElectionApplication.main(new String[]{});
