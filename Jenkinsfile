@@ -11,8 +11,8 @@ try {
         }
         stage('Test') {
             echo 'Running Tests....'
-            sh './gradlew bootRun'
-            sh './gradlew cucumberTests'
+            //sh './gradlew bootRun'
+            //sh './gradlew cucumberTests'
 
             step([$class: 'JUnitResultArchiver', testResults: '**/cucumber-test-results/TEST-*.xml'])
             step([$class: 'JacocoPublisher', execPattern:'build/jacoco/test.exec', classPattern: 'build/classes/main',
