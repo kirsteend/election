@@ -1,4 +1,4 @@
-package com.example.election.voter;
+package com.example.election.web;
 
 import com.example.election.domain.Voter;
 import com.example.election.service.VoterService;

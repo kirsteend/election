@@ -5,7 +5,7 @@ Sample project that uses Spring framework and demonstrates REST api.
 - Spring REST api (GET, POST, PUT)
 - jpa repository
 - code coverage with jacoco
-- sample jenkins pipeline
+- jenkins pipeline
 
 ## Election Concepts
 The following concepts will be used in this sample.
@@ -56,5 +56,4 @@ $ curl -X GET http://localhost:8080/voters
 
 ## Future Considerations 
 - Dockerise
-- static code analysis
 - add cucumber tests

@@ -1,9 +1,7 @@
-package com.example.election.voter;
+package com.example.election.service;
 
 import com.example.election.domain.Voter;
 import com.example.election.domain.Poll;
-import com.example.election.service.PollRepository;
-import com.example.election.service.VoterRepository;
 import com.example.election.service.impl.VoterServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
