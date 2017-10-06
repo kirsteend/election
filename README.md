@@ -41,13 +41,13 @@ $  curl -X POST http://localhost:8080/voters --header "Content-Type: application
 ### Retrieve a voter based on name
 ```
 $ curl -X GET http://localhost:8080/voters?name=Kirsteen
-[{"id":"59d4e39554405e0443ba5009","name":"Kirsteen","postCode":"M2P 2H1"}]
+[{"id":"3","name":"Kirsteen","postCode":"M2P 2H1"}]
 ```
 
 ### Retrieve all voters
 ```
 $ curl -X GET http://localhost:8080/voters
-[{"id":"59d4e39554405e0443ba5009","name":"Kirsteen","postCode":"M2P 2H1"},{"id":"59d4e3bf54405e0443ba500a","name":"John","postCode":"M3C 0C1"}]
+[{"id":"3","name":"Kirsteen","postCode":"M2P 2H1"},{"id":"4","name":"John","postCode":"M3C 0C1"}]
 ```
 
 ## Future Considerations 
